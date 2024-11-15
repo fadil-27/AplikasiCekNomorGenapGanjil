@@ -137,21 +137,33 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String inputText = jTextField1.getText();
-  
-        // Try converting the input to an integer
-        try {
-          int number = Integer.parseInt(inputText);
 
-          // Check if the number is even or odd
-          if (number % 2 == 0) {
-            jLabel2.setText(number + " is even");
-          } else {
-            jLabel2.setText(number + " is odd");
-          }
-        } catch (NumberFormatException e) {
-          // Handle invalid input (not a number)
-          jLabel2.setText("Invalid input. Please enter a number.");
+        // Pisahkan input berdasarkan spasi atau koma
+        String[] numbers = inputText.split("[ ,]+");
+
+        // Buat `StringBuilder` untuk menyimpan hasil
+        StringBuilder result = new StringBuilder();
+
+        // Proses setiap angka yang diinput
+        for (String numStr : numbers) {
+            try {
+                // Coba konversi input ke integer
+                int number = Integer.parseInt(numStr.trim());
+
+                // Periksa apakah angka genap atau ganjil
+                if (number % 2 == 0) {
+                    result.append(number).append(" adalah genap\n");
+                } else {
+                    result.append(number).append(" adalah ganjil\n");
+                }
+            } catch (NumberFormatException e) {
+                // Tangani input yang tidak valid (bukan angka)
+                result.append(numStr).append(" bukan angka yang valid\n");
+            }
         }
+
+        // Tampilkan hasil ke jLabel2
+        jLabel2.setText(result.toString());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
